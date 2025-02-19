@@ -1,0 +1,427 @@
+>>>malloy
+source: Firearms is duckdb.table('./nics-firearm-background-checks.csv') extend {
+    rename: check_date is `month`
+
+    measure: 
+    total_checks is totals.sum()
+    total_handguns is handgun.sum()
+    total_long_guns is long_gun.sum()
+    total_priv_handgun_sales is private_sale_handgun.sum()
+    total_priv_long_gun_sales is private_sale_long_gun.sum()
+    total_permits is permit.sum()
+    total_permit_rechecks is permit_recheck.sum()
+    total_returned_handguns is returned_handgun.sum()
+    total_redemptions is redemption_handgun.sum() + redemption_long_gun.sum() + redemption_other.sum()
+    total_redemption_handguns is redemption_handgun.sum()
+    avg_checks is totals.avg()
+    total_priv_sales is private_sale_handgun.sum() + private_sale_long_gun.sum() + private_sale_other.sum()
+    total_retail_sales is totals.sum() - total_priv_sales
+    total_returned_firearms is return_to_seller_handgun.sum() + return_to_seller_long_gun.sum() + return_to_seller_other.sum() 
+    total_rentals is rentals_handgun.sum() + rentals_long_gun.sum()
+    multiple_purchases is multiple.sum()
+    prepawned_handguns is prepawn_handgun.sum()
+    prepawned_long_guns is prepawn_long_gun.sum()
+    prepawned_other is prepawn_other.sum()
+    total_prepawned is prepawn_handgun.sum() + prepawn_long_gun.sum() + prepawn_other.sum()
+
+
+
+
+
+ 
+    dimension: 
+    check_month is substr(check_date, -2)
+    check_month_number is check_month::number
+    check_year is substr(check_date, 1, 4)
+    check_year_number is check_year::number
+
+}
+>>>markdown
+1. How many total background checks were performed?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_checks
+}
+>>>markdown
+2. What is the total number of handgun background checks?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_handguns
+}
+>>>markdown
+3. What is the total number of long gun background checks?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_long_guns
+}
+>>>markdown
+4. How many background checks were conducted for private sales of handguns?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_priv_handgun_sales
+}
+>>>markdown
+5. How many background checks were conducted for private sales of long guns?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_priv_long_gun_sales
+}
+>>>markdown
+## State-Level Analysis
+>>>markdown
+6. Which state has the highest total background checks?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_checks
+    order_by: total_checks desc
+}
+>>>markdown
+7. Which State has the lowest total background checks?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_checks
+    order_by: total_checks asc
+}
+>>>markdown
+8. How many background checks were conducted in California?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_checks
+    where: state = 'California'
+}
+>>>markdown
+9. How many background checks were conducted in Washington?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_checks
+    where: state = 'Washington'
+}
+>>>markdown
+10. How many background checks were conducted in New Jersey?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_checks
+    where: state = 'New Jersey'
+}
+>>>markdown
+## Trends over time
+>>>markdown
+11. How do total background checks vary by month?
+>>>malloy
+run: Firearms -> {
+    group_by: check_date
+    aggregate: total_checks
+    order_by: check_date asc
+}
+>>>markdown
+12. What is the month with the highest number of background checks?
+>>>malloy
+run: Firearms -> {
+    group_by: check_month_number
+    aggregate: total_checks
+    order_by: total_checks desc
+}
+>>>markdown
+13. What is the month with the lowest number of background checks?
+>>>malloy
+run: Firearms -> {
+    group_by: check_month_number
+    aggregate: total_checks
+    order_by: total_checks asc
+}
+>>>markdown
+14. How did background checks trend over time in California?
+>>>malloy
+run: Firearms -> {
+    group_by: check_month_number
+    aggregate: total_checks
+    where: state = 'California'
+    order_by: check_month_number asc
+}
+>>>markdown
+15. How did background checks trend over time in Washington?
+>>>malloy
+run: Firearms -> {
+    group_by: check_month_number
+    aggregate: total_checks
+    where: state = 'Washington'
+    order_by: check_month_number asc
+}
+>>>markdown
+16. How did background checks trend over time in New Jersey?
+>>>malloy
+run: Firearms -> {
+    group_by: check_month_number
+    aggregate: total_checks
+    where: state = 'New Jersey'
+    order_by: check_month_number asc
+}
+>>>markdown
+## Specific Firearm Types
+>>>markdown
+17. How many handgun background checks were performed in New York?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_handguns
+    where: state = 'New York'
+}
+>>>markdown
+18. How many long gun bacground checks were performed in Florida?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_long_guns
+    where: state = 'Florida'
+}
+>>>markdown
+19. Which state had the highest number of handgun background checks?
+>>>malloy
+run: Firearms -> {
+  group_by: state
+  aggregate: total_handguns
+  order_by: total_handguns desc
+}
+>>>markdown
+20. Which state had the highest number of long gun background checks?
+>>>malloy
+run: Firearms -> {
+  group_by: state
+  aggregate: total_long_guns
+  order_by: total_long_guns desc
+}
+>>>markdown
+## Permit and License Checks
+>>>markdown
+21. How many permit background checks were conducted?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_permits
+}
+>>>markdown
+22. Which state had the highest number of permit background checks?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_permits
+    order_by: total_permits desc
+}
+>>>markdown
+23. Which state had the lowest number of permit background checks?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_permits
+    order_by: total_permits asc
+}
+>>>markdown
+24. How many permit rechecks were performed?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_permit_rechecks
+}
+>>>markdown
+25. Which state had the highest number of permit rechecks?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_permit_rechecks
+    order_by: total_permit_rechecks desc
+}
+>>>markdown
+## Other
+>>>markdown
+26. How many total returned handguns were recorded?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_returned_handguns
+}
+>>>markdown
+27. Which state had the most returned handguns?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_returned_handguns
+    order_by: total_returned_handguns desc
+}
+>>>markdown
+28. Which state had the least returned handguns?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_returned_handguns
+    order_by: total_returned_handguns asc
+}
+>>>markdown
+29. How many total redemption background checks were conducted?
+>>>malloy
+run: Firearms -> {
+    aggregate: total_redemptions
+}
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_redemption_handguns
+}
+>>>markdown
+29. Which state had the most redemption handgun background checks?
+>>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_redemption_handguns
+    order_by: total_redemption_handguns desc
+}
+>>>markdown
+30. Which state had the biggest spike in background checks in a single month?
+>>>malloy
+run: Firearms -> {
+  group_by: state, check_month_number 
+  aggregate: total_checks 
+  order_by: total_checks desc
+  limit: 1
+}
+>>>markdown
+31. What is the average number of background checks per state?
+>>>malloy
+run: Firearms -> {
+  group_by: state
+  aggregate: avg_checks 
+  order_by: avg_checks desc
+}
+>>>markdown
+32. What percentage of total background checks were for handguns vs. long guns?
+>>>malloy
+run: Firearms -> {
+  aggregate: 
+    total_handguns 
+    total_long_guns
+    # percent 
+    percentage_handguns is (total_handguns / totals.sum()),
+    # percent
+    percentage_long_guns is (total_long_guns / totals.sum())
+}
+>>>markdown
+33. How do private gun sales compare to retail gun sales?
+>>>malloy
+run: Firearms -> {
+  aggregate: 
+    total_priv_handgun_sales  
+    total_priv_long_gun_sales
+    total_priv_sales,
+    total_retail_sales,
+    # percent
+    priv_sales_percentage is (total_priv_sales / totals.sum()) * 100,
+    # percent
+    retail_sales_percentage is (total_retail_sales / totals.sum())
+}
+>>>markdown
+34. What are the top 5 states for private gun sales?
+>>>malloy
+run: Firearms -> {
+  group_by: state
+  aggregate: total_priv_sales
+  order_by: total_priv_sales desc
+  limit: 5
+}
+>>>markdown
+35. Which states have the highest number of returned firearms?
+>>>malloy
+run: Firearms -> {
+  group_by: state
+  aggregate: total_returned_firearms 
+  order_by: total_returned_firearms desc
+}
+>>>markdown
+36. Are gun background checks increasing or decreasing over time?
+>>>malloy
+run: Firearms -> {
+  group_by: check_year 
+  aggregate: total_checks 
+  order_by: check_year asc
+}
+>>>markdown
+37. How have permit background checks changed over time?
+>>>malloy
+run: Firearms -> {
+  group_by: check_year 
+  aggregate: total_permits
+  order_by: check_year asc
+}
+>>>markdown
+38. Which year had the highest number of gun permit applications?
+>>>malloy
+run: Firearms -> {
+  group_by: check_year 
+  aggregate: total_permits
+  order_by: total_permits desc
+  limit: 1
+}
+>>>markdown
+39. What percentage of background checks are for gun rentals?
+>>>malloy
+run: Firearms -> {
+  aggregate: 
+    total_rentals 
+    # percent 
+    percentage_rentals is (total_rentals / totals.sum()) * 100
+
+}
+>>>markdown
+40. What are the top 3 months for background checks, historically?
+>>>malloy
+run: Firearms -> {
+  group_by: check_month 
+  aggregate: total_checks 
+  order_by: total_checks desc
+  limit: 3
+}
+>>>markdown
+41. Are there seasonal trends in gun purchases?
+>>>malloy
+run: Firearms -> {
+  group_by: check_month 
+  aggregate: avg_checks 
+  order_by: avg_checks desc
+}
+>>>markdown
+42. What is the busiest month for handgun vs. long gun purchases?
+>>>malloy
+run: Firearms -> {
+  group_by: check_month
+  aggregate: 
+    total_handguns,
+    total_long_guns
+  order_by: total_handguns desc
+}
+>>>markdown
+43. Which month has the highest number of multiple firearm purchases?
+>>>malloy
+run: Firearms -> {
+  group_by: check_month
+  aggregate: multiple_purchases
+  order_by: multiple_purchases desc
+}
+>>>markdown
+44. Which state has the highest number of pawned firearm transactions?
+>>>malloy
+run: Firearms -> {
+  group_by: state
+  aggregate: 
+    prepawned_handguns, 
+    prepawned_long_guns, 
+    prepawned_other,
+    total_prepawned
+  order_by: total_prepawned desc
+}
+>>>markdown
+45. What is the ratio of handguns to long guns per state?
+>>>malloy
+run: Firearms -> {
+  group_by: state
+  aggregate: 
+    total_handguns,
+    total_long_guns,
+    handgun_to_longgun_ratio is total_handguns / total_long_guns
+  order_by: handgun_to_longgun_ratio desc
+}
+>>>malloy
