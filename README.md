@@ -57,3 +57,13 @@ This dataset can be used for:
 To allow this file to properly run make sure open the documents within VSCode and you have download the following add-ons:
 Malloy extension
 Rainbow.csv
+
+## License
+This dataset and accompanying code are released under the **MIT License**.
+You are free to:
+- Use, copy, modify, and distribute the data and code for any purpose.
+- Share it freely with attribution.
+**Disclaimer:** This dataset is provided "as is," without any warranties or guarantees. 
+See the full [MIT License](LICENSE) for more details.
+
+
