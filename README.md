@@ -1,70 +1,56 @@
-# FBI NICS Firearms Background Checks Dataset
-This repository contains data on **firearm background checks** conducted across the United States. The dataset includes state-level firearm transactions, categorized by differenct firearm types, purchase methods, and administrative processes.
+# FBI NICS Firearm Background Check Data
+
 The data in this repository comes from the [FBI's National Instant Criminal Background Check System](https://www.fbi.gov/about-us/cjis/nics).
 
-## Dataset Overview
-This dataset provides insights into:
-- **Trends** in firearm background checks over time
-- **State-by-State firearm purchases and returns**
-- **Handgun vs. Long gun transactions**
-- **Private Sales, rentals, and pawn shop transactions**
-- **Returned, rejected, and redemptive firearm transactions**
+> Mandated by the Brady Handgun Violence Prevention Act of 1993 and launched by the FBI on November 30, 1998, NICS is used by Federal Firearms Licensees (FFLs) to instantly determine whether a prospective buyer is eligible to buy firearms or explosives. Before ringing up the sale, cashiers call in a check to the FBI or to other designated agencies to ensure that each customer does not have a criminal record or isn’t otherwise ineligible to make a purchase. More than 100 million such checks have been made in the last decade, leading to more than 700,000 denials.
 
-## Notes on the Dataset
-Sales estimates are calculated from handgun, long gun and multiple-gun background checks. Permit checks and other categories of background checks are excluded. In California, multiple-gun checks were excluded because data was inconsistent. Because state laws differ, sales levels between states cannot be directly compared.
+The FBI provides data on the number of firearm checks by month, state, and type — [but as a PDF](https://www.fbi.gov/file-repository/nics_firearm_checks_-_month_year_by_state_type.pdf/view). The code in this GitHub repository downloads that PDF, parses it, and produces a spreadsheet/CSV of the data. [__Click here to download the data__](data/nics-firearm-background-checks.csv?raw=true), which currently covers November 1998 – January 2025.
 
+## Notes On The Data
 
-## Data Structure
-The dataset contains the following columns:
-| Column Name             | Description|
-| `admin`                 | Administrative checks related to firearm transactions |
-| `check_date`            | Full date of background check (YYYY-MM-DD) |
-| `check_month`           | Month name of background check (e.g., "January") |
-| `check_month_number`    | Month number (1-12) of background check |
-| `handgun`               | Number of background checks for **handguns** |
-| `long_gun`              | Number of background checks for **long guns (rifles/shotguns)** |
-| `multiple`              | Number of transactions involving **multiple firearms** |
-| `other`                 | Background checks classified under "other" |
-| `permit`                | Number of background checks for **firearm permits** |
-| `permit_recheck`        | Number of permit **rechecks** (e.g., for renewal or verification) |
-| `perpawn_handgun`       | Pawned **handgun** transactions |
-| `prepawn_long_gun`      | Pawned **long gun** transactions |
-| `prepawn_other`         | Other types of **pawned** firearm transactions |
-| `private_sale_handgun`  | Private sales of **handguns** |
-| `private_sale_long_gun` | Private sales of **long guns** |
-| `redemption_handgun`    | Redeemed **handguns** (previously pawned/sold) |
-| `redemption_long_gun`   | Redeemed **long guns** (previously pawned/sold) |
-| `redemption_other`      | Other types of **redeemed** firearms |
-| `rentals_handgun`       | Rented **handguns** |
-| `rentals_long_gun`      | Rented **long guns** |
-| `return_to_seller_handgun` | **Handguns returned** to the seller |
-| `return_to_seller_long_gun` | **Long guns returned** to the seller |
-| `return_to_seller_other` | Other **firearm returns** to the seller |
-| `returned_handgun`      | **Handguns returned** after purchase |
-| `returned_long_gun`     | **Long guns returned** after purchase |
-| `returned_other`        | Other **returned** firearms |
-| `state`                 | **U.S. state** where the background check was conducted |
-| `totals`                | **Total number of background checks** per record |
+The original PDF contains important notes and caveats. It's a good idea to read those first before diving into the data. Among the caveats is this important one — emphasis added:
 
+> These statistics represent the number of firearm background checks initiated through the NICS. They do not represent the number of firearms sold. Based on varying state laws and purchase scenarios, __a one-to-one correlation cannot be made between a firearm background check and a firearm sale__.
 
-## Usage
-This dataset can be used for:
-- **Analyzing trends** in firearm background checks across states and time periods
-- **Comparing gun sales reguilations** between sales
-- **Visualizing firearm purchases** using data analytics tools like Malloy
+A bit more background, [from *The Trace*](http://www.thetrace.org/2015/11/black-friday-gun-sales-background-checks/) in 2015:
 
-## How to Use
-To allow this file to properly run make sure open the documents within VSCode and you have download the following add-ons:
-- Malloy extension
-- Rainbow.csv
+> The FBI’s background check numbers come with caveats: As seen in the late February-early March 2014 bubble, many checks are for concealed carry permits, not actual gun sales. Kentucky runs a new check on each concealed carry license holder each month. And of course, the FBI’s numbers don’t include private gun sales, many of which do not require a background check. [...] Despite those vagaries, the FBI’s NICS numbers are widely accepted as the best proxy for total gun sales in a given time period.
 
-## License
-This dataset and accompanying code are released under the **MIT License**.
-You are free to:
-- Use, copy, modify, and distribute the data and code for any purpose.
-- Share it freely with attribution.
+That article mentions a forthcoming study, which ultimately was [published in February 2017 in the Annals of Internal Medicine](https://www.acpjournals.org/doi/10.7326/M16-1590). The study surveyed 1,613 adult gun owners in 2015. Approximately 29% had acquired their most recent gun within the past two years; of that subset, roughly 22% had done so without a background check — although that number varied substantially depending on the mode of acquisition and state laws.
 
-**Disclaimer:** This dataset is provided "as is," without any warranties or guarantees. 
-See the full [MIT License](LICENSE) for more details.
+Not all categories of background checks may be equally useful/pertinent to your research. When *The New York Times* [analyzed NICS data in Dec. 2015](http://www.nytimes.com/interactive/2015/12/10/us/gun-sales-terrorism-obama-restrictions.html), it included this methodological note:
 
+> Note: Sales estimates are calculated from handgun, long gun and multiple-gun background checks. Permit checks and other categories of background checks are excluded. In California, multiple-gun checks were excluded because data was inconsistent. Because state laws differ, sales levels between states cannot be directly compared.
 
+The authors of that *NYT* analysis [describe how they used the NICS data to estimate gun sales](https://github.com/NYTimes/gun-sales#getting-gun-sales-estimates-from-background-checks):
+
+> To convert background checks into estimated sales, we relied on a method suggested in the [Small Arms Survey](http://www.smallarmssurvey.org/fileadmin/docs/F-Working-papers/SAS-WP14-US-Firearms-Industry.pdf) by Jurgen Brauer, a professor at Georgia Regents University. Each long gun and handgun check was counted as 1.1 sales. Each multiple-gun check was counted as two sales. Permit checks and other types of checks were omitted. The multiplier is an estimate based on Mr. Brauer's interviews with gun shop owners.
+
+## Additional Resources
+
+- [NICS Federal Firearms Licensee Manual](https://www.fbi.gov/file-repository/nics-firearms-licensee-manual-111811.pdf/view), which details the history and rules of the background-check program.
+
+- [NICS Participation Map](https://www.fbi.gov/file-repository/nics-participation-map.pdf/view), which "depicts each state's level of participation with the NICS."
+
+## Charts
+
+![Monthly NICS Background Check Totals Since Nov. 1998](charts/total-checks-all.png)
+
+![NICS Background Check Totals — Past 36 Months](charts/total-checks-36-months.png)
+
+## Run The Parser Yourself
+
+All the necessary code is open-source. If you'd like to run the parser yourself, you'll need:
+
+- Python 3.x
+- The libraries listed in [`requirements.txt`](requirements.txt)
+
+Then run `make all`. (See the [`Makefile`](Makefile) to view the individual commands.)
+
+## Questions / Feedback / Improvements
+
+File [an issue](issues), or email jsvine@gmail.com.
+
+## Credits
+
+This open-source repository was created by Jeremy Singer-Vine ([@jsvine](https://github.com/jsvine)) at BuzzFeed News in 2015. In 2023, [BuzzFeed News shut down](https://www.buzzfeednews.com/). In April 2024, Singer-Vine forked this repository to the [Data Liberation Project](https://www.data-liberation-project.org/)'s [GitHub organization](https://github.com/data-liberation-project).
