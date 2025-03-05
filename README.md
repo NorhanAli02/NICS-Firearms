@@ -12,6 +12,7 @@ This dataset provides insights into:
 - **Private Sales, rentals, and pawn shop transactions**
 - **Returned, rejected, and redemptive firearm transactions**
 
+
 ## Notes on the Dataset
 Sales estimates are calculated from handgun, long gun and multiple-gun background checks. Permit checks and other categories of background checks are excluded. In California, multiple-gun checks were excluded because data was inconsistent. Because state laws differ, sales levels between states cannot be directly compared.
 
@@ -59,6 +60,14 @@ This dataset can be used for:
 To allow this file to properly run make sure open the documents within VSCode and you have download the following add-ons:
 - Malloy extension
 - Rainbow.csv
+
+## Dataset Summar
+From the analysis of this dataset, we discovered the following: 
+1. **Background checks fluctuate seasonnally**, with **spikes around elections and major holidays.**
+2. **Certain states dominate firearm trasnactions**, particularly **Texas, California, and Florida**
+3. **Handgun sales outpace long guns in most states**, though **hunting states favor long guns**
+4. **Private sales contirbute signifcantly**, especially in states with **less restrictive firearm laws**
+5. **Firearm returns and rejections are common**, especially for **handguns.**
 
 ## License
 This dataset and accompanying code are released under the **MIT License**.
