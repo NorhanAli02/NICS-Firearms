@@ -38,7 +38,9 @@ source: Firearms is duckdb.table('./data/nics-firearm-background-checks.csv') ex
 
 }
 >>>markdown
-<<mark>> Scatter plot of total permits per state <<mark>>
+## SOME INTERESTING VISUALIZATIONS 
+>>>markdown
+**Scatter plot of total permits per state***
 >>>malloy
 # scatter_chart
 run: Firearms -> {
@@ -46,7 +48,7 @@ run: Firearms -> {
   aggregate: total_permits
 }
 >>>markdown
-<<mark>> Dashboard of total redemptions per year <<mark>>
+**Dashboard of total redemptions per year**
 >>>malloy
 # dashboard
 run: Firearms -> {
@@ -54,7 +56,7 @@ run: Firearms -> {
   aggregate: total_redemptions
 }
 >>>markdown
-<<mark>> shape map of total returned firearms throughout the United States <<mark>>
+**Shape map of total returned firearms throughout the United States**
 >>>malloy
 # shape_map
 run: Firearms -> {
@@ -62,7 +64,7 @@ run: Firearms -> {
   aggregate: total_returned_firearms
 }
 >>>markdown
- <<mark>> Bar Chart: Total Background Checks by State <<mark>>
+**Bar Chart of Total Background Checks by State**
 >>>malloy
 # bar_chart
 run: Firearms -> {
@@ -71,7 +73,7 @@ run: Firearms -> {
     order_by: total_checks asc
 }
 >>>markdown
-<<mark>> Line Chart: Monthly Trend of Firearm Background Checks <<mark>>
+**Line Chart of Monthly Trend of Firearm Background Checks**
 >>>malloy
 # line_chart
 run: Firearms -> {
@@ -79,6 +81,8 @@ run: Firearms -> {
     aggregate: total_checks
     order_by: check_month_number asc
 }
+>>>markdown
+## Brief Analysis
 >>>markdown
 **How many total background checks were performed?**
 >>>malloy
