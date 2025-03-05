@@ -49,6 +49,11 @@ The dataset contains the following columns:
 | `state`                 | **U.S. state** where the background check was conducted |
 | `totals`                | **Total number of background checks** per record |
 
+Visualizations and Insights
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+
 
 ## Usage
 This dataset can be used for:
@@ -61,13 +66,20 @@ To allow this file to properly run make sure open the documents within VSCode an
 - Malloy extension
 - Rainbow.csv
 
-## Dataset Summar
+## Dataset Summary
 From the analysis of this dataset, we discovered the following: 
 1. **Background checks fluctuate seasonnally**, with **spikes around elections and major holidays.**
+- December is the peak month for firearm background checks → Possibly due to holiday season sales, hunting season, and political concerns.
 2. **Certain states dominate firearm trasnactions**, particularly **Texas, California, and Florida**
+- Kentucky has the highest number of background checks → This may be influenced by state policies or a high gun ownership rate.
 3. **Handgun sales outpace long guns in most states**, though **hunting states favor long guns**
+- When filtering states with strong hunting cultures (Montana, Wyoming, Alaska, North Dakota, South Dakota), the data confirms that long guns are purchased more frequently than handguns in these areas.
 4. **Private sales contirbute signifcantly**, especially in states with **less restrictive firearm laws**
+- States like Mariana Islands and Virgin Islands have the fewest background checks, likely due to low population and strict firearm laws.
 5. **Firearm returns and rejections are common**, especially for **handguns.**
+- Handguns have higher return rates than long guns, likely due to background check denials or legal restrictions.
+- Administrative processes, permit rechecks, and failed background checks contribute to firearm rejections.
+
 
 ## License
 This dataset and accompanying code are released under the **MIT License**.
