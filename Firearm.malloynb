@@ -11,6 +11,7 @@ source: Firearms is duckdb.table('./data/nics-firearm-background-checks.csv') ex
     total_permits is permit.sum()
     total_permit_rechecks is permit_recheck.sum()
     total_returned_handguns is returned_handgun.sum()
+    total_returned_long_guns is returned_long_gun.sum()
     total_redemptions is redemption_handgun.sum() + redemption_long_gun.sum() + redemption_other.sum()
     total_redemption_handguns is redemption_handgun.sum()
     avg_checks is totals.avg()
@@ -35,6 +36,30 @@ source: Firearms is duckdb.table('./data/nics-firearm-background-checks.csv') ex
     check_year is substr(check_date, 1, 4)
     check_year_number is check_year::number
 
+}
+>>>markdown
+<<mark>> Scatter plot of total permits per state <<mark>>
+>>>malloy
+# scatter_chart
+run: Firearms -> {
+  group_by: state
+  aggregate: total_permits
+}
+>>>markdown
+<<mark>> Dashboard of total redemptions per year <<mark>>
+>>>malloy
+# dashboard
+run: Firearms -> {
+  group_by: check_year
+  aggregate: total_redemptions
+}
+>>>markdown
+<<mark>> shape map of total returned firearms throughout the United States <<mark>>
+>>>malloy
+# shape_map
+run: Firearms -> {
+  group_by: state
+  aggregate: total_returned_firearms
 }
 >>>markdown
  <<mark>> Bar Chart: Total Background Checks by State <<mark>>
@@ -284,6 +309,13 @@ run: Firearms -> {
 >>>markdown
 **Which state had the least returned handguns?**
 >>>malloy
+run: Firearms -> {
+    group_by: state
+    aggregate: total_returned_handguns
+    order_by: total_returned_handguns asc
+}
+>>>malloy
+# bar_chart_stacked
 run: Firearms -> {
     group_by: state
     aggregate: total_returned_handguns
