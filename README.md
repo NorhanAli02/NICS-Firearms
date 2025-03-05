@@ -49,10 +49,12 @@ The dataset contains the following columns:
 | `state`                 | **U.S. state** where the background check was conducted |
 | `totals`                | **Total number of background checks** per record |
 
-Visualizations and Insights
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
+## Visualizations and Insights
+![E14D3FCA-261E-4672-A063-76D09673E8EE_1_201_a](https://github.com/user-attachments/assets/0fa078ad-0a1a-4d7b-9bb1-597d7b35bbf1)
+![A0673FBA-558F-48A8-B2E6-4141553A1E0D_1_201_a](https://github.com/user-attachments/assets/24209a69-d7e4-48ea-b3c0-2361025e57ca)
+![7E775511-3D03-4086-9551-9E79B91287EB_1_201_a](https://github.com/user-attachments/assets/6db77b41-0bf8-4b2a-a6b5-6a39ff35db03)
+![949DB0BB-5BC7-44E4-821B-3B0884978F2E_1_201_a](https://github.com/user-attachments/assets/3d00867f-f691-40df-9de3-81f058f27475)
+![864921E6-4E09-4F18-B480-95084D1D036D_1_201_a](https://github.com/user-attachments/assets/9150da45-bf68-49d9-8f4a-3ebd694a3f30)
 
 
 ## Usage
