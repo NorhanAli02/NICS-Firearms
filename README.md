@@ -50,10 +50,40 @@ The dataset contains the following columns:
 | `totals`                | **Total number of background checks** per record |
 
 ## Visualizations and Insights
+
+**Total Permits by State**
+- This scatter plot ranks states based on total permits issued.
+- Kentucky, Illinois, and California lead with the highest numbers.
+- The trend gradually declines, with some states having significantly fewer permits.
+
 ![E14D3FCA-261E-4672-A063-76D09673E8EE_1_201_a](https://github.com/user-attachments/assets/0fa078ad-0a1a-4d7b-9bb1-597d7b35bbf1)
+
+**Total Checks Heatmap by State**
+- This choropleth map represents the distribution of total checks across the United States.
+- Darker shades indicate states with higher check volumes.
+- California, Texas, and other high-population states show the most activity, while smaller states display lighter shades.
+
 ![A0673FBA-558F-48A8-B2E6-4141553A1E0D_1_201_a](https://github.com/user-attachments/assets/24209a69-d7e4-48ea-b3c0-2361025e57ca)
+
+**Total Checks for a State in Each Region** 
+- This bar chart compares the total number of checks for a representative state from different U.S. regions.
+- The goal is to identify whether the number of checks varies significantly across different regions.
+- California leads with the highest total, followed by Tennessee and Missouri, while Montana and New Jersey have lower totals.
+
 ![7E775511-3D03-4086-9551-9E79B91287EB_1_201_a](https://github.com/user-attachments/assets/6db77b41-0bf8-4b2a-a6b5-6a39ff35db03)
+
+**Total Checks By State (Ascending)**
+- This bar chart displays the total number of checks conducted per state, arranged in ascending order.
+- The Mariana Islands, District of Columbia, and Puerto Rico report the lowest number of checks.
+- Indiana has the highest total checks, significantly surpassing other states.
+
 ![949DB0BB-5BC7-44E4-821B-3B0884978F2E_1_201_a](https://github.com/user-attachments/assets/3d00867f-f691-40df-9de3-81f058f27475)
+
+**Monthly Trend of Total Checks**
+- This line chart visualizes the trend of total checks conducted over a 12-month period.
+- The data shows fluctuations, with a dip in the middle months followed by a strong upward trend towards the end of the year.
+- The peak occurs in the final months, indicating a significant increase in activity.
+
 ![864921E6-4E09-4F18-B480-95084D1D036D_1_201_a](https://github.com/user-attachments/assets/9150da45-bf68-49d9-8f4a-3ebd694a3f30)
 
 
